@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1># network-musician</h1>
+{% for x in users | reverse %}
+ <li>{{ x["first_name"]  }}</li>
+
+{% endfor %} 
+{% endblock %}
+{% block liens %}
+<a href="/">welcome</a>
+{% endblock %}
+<a href="/add_one_user"> add one user</a><a href="/add_one_itskills"> add one itskills</a><a href="/add_one_musicalskills"> add one musicalskills</a><a href="/add_one_userhasmusicalskill"> add one userhasmusicalskill</a><a href="/add_one_userhasitskill"> add one userhasitskill</a>
