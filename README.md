@@ -1,5 +1,47 @@
 # network-musician
-netwoirk musicians
+- netwoirk musicians
+
+
+
+*TABLE 1: PROFILES*
+- id: girl_musician / boy_musician
+- role: network-musician
+- twitter_account
+- visage / voix / videos / oeuvres [optionnel, filtré]
+- status: developer / not developer / no-coder
+
+*TABLE 2: SKILLS_MUSIC *
+- orchestra
+- chamber_music
+- concerto_solo
+- creation_artistique
+- performance_live_online[commun]
+
+*TABLE 3: SKILLS_IT *
+- orchestration_conteneurs = orchestration_musicale [parallèle]
+- network_engineering
+- dev_tools / automation
+- monitoring_stats_vues_popularite
+- tweet_skill_it[commun]
+
+*TABLE 4: CONTENT_FLOW*
+- tweet_my_skill:
+ - jour 1: extrait concerto
+ - jour 2: astuce Kubernetes / container
+ - jour 3: chamber music + dashboard
+- type: [IT][musical][hybride]
+
+*TABLE 5: PROJETS*
+- Fille: souvent -> concerto + automation diffusion
+- Garçon: souvent -> orchestra + orchestration cluster
+- Mais interchangeable - c'est le principe hybride
+- website: scène musicale + scène numérique
+
+*Concept en 1 ligne:*
+> Un orchestre = un cluster. Un chef d'orchestre = un orchestrateur de conteneurs. Elle/il passe d'un concert à un cluster.
+
+
+
 # network musician
 - twitter account
 - tweet my skill:
