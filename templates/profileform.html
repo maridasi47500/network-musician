@@ -1,0 +1,14 @@
+{% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
+<div class="field"><label for="somefieldprofilegirl_boy_id">girl_boy_id</label><input type="text" id="somefieldprofilegirl_boy_id" name="girl_boy_id"/></div>
+<div class="field"><label for="somefieldprofilerole">role</label><input type="text" id="somefieldprofilerole" name="role"/></div>
+<div class="field"><label for="somefieldprofilesocialmedia_id">socialmedia_id</label><input type="text" id="somefieldprofilesocialmedia_id" name="socialmedia_id"/></div>
+<div class="field"><label for="somefieldprofileoptionnel_visage_voix">optionnel_visage_voix</label><input type="text" id="somefieldprofileoptionnel_visage_voix" name="optionnel_visage_voix"/></div>
+<div class="field"><label for="somefieldprofilestatus_developer">status_developer</label><input type="text" id="somefieldprofilestatus_developer" name="status_developer"/></div>
+<div class="field"><label for="somefieldprofileusername">username</label><input type="text" id="somefieldprofileusername" name="username"/></div>
+<div class="field"><label for="somefieldprofilepassword">password</label><input type="password" id="somefieldprofilepassword" name="password"/></div>
+<div class="field"><label for="somefieldprofileemail">email</label><input type="email" id="somefieldprofileemail" name="email"/></div>
+<div class="field"><label for="somefieldprofilephone">phone</label><input type="telephone" id="somefieldprofilephone" name="phone"/></div>
+<div class="field"><label for="somefieldcountry_id">country_id</label><select id="somefieldcountry_id" name="country_id"><option value="novalue">no value</option>
+{% for somecountry in touslescountry %}
+<option value="{{ somecountry['id'] }}">{{ somecountry['name'] }}</option>{% endfor %}
+</select></div><div class="actions"><input type="submit"/></div></form>{% for x in profiles %}{{x["girl_boy_id"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_profile"> add one profile</a>{% endblock %}

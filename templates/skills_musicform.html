@@ -1,0 +1,12 @@
+{% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
+<div class="field"><label for="somefieldorchestra">orchestra</label><label for="somefieldorchestra1"><input type="radio" id="somefieldorchestra1" name="orchestra" value="1"/>yes</label>
+<label for="somefieldorchestra2"><input type="radio" id="somefieldorchestra2" name="orchestra" value="0"/>no</label></div>
+<div class="field"><label for="somefieldchamber_music">chamber_music</label><label for="somefieldchamber_music1"><input type="radio" id="somefieldchamber_music1" name="chamber_music" value="1"/>yes</label>
+<label for="somefieldchamber_music2"><input type="radio" id="somefieldchamber_music2" name="chamber_music" value="0"/>no</label></div>
+<div class="field"><label for="somefieldconcerto_solo">concerto_solo</label><label for="somefieldconcerto_solo1"><input type="radio" id="somefieldconcerto_solo1" name="concerto_solo" value="1"/>yes</label>
+<label for="somefieldconcerto_solo2"><input type="radio" id="somefieldconcerto_solo2" name="concerto_solo" value="0"/>no</label></div>
+<div class="field"><label for="somefieldcreation_artistique">creation_artistique</label><label for="somefieldcreation_artistique1"><input type="radio" id="somefieldcreation_artistique1" name="creation_artistique" value="1"/>yes</label>
+<label for="somefieldcreation_artistique2"><input type="radio" id="somefieldcreation_artistique2" name="creation_artistique" value="0"/>no</label></div>
+<div class="field"><label for="somefieldperformance_live_online">performance_live_online</label><label for="somefieldperformance_live_online1"><input type="radio" id="somefieldperformance_live_online1" name="performance_live_online" value="1"/>yes</label>
+<label for="somefieldperformance_live_online2"><input type="radio" id="somefieldperformance_live_online2" name="performance_live_online" value="0"/>no</label></div>
+<div class="field"><label for="somefieldskills_musicuser_id">user_id</label><input type="text" id="somefieldskills_musicuser_id" name="user_id"/></div><div class="actions"><input type="submit"/></div></form>{% for x in skills_musics %}{{x["orchestra"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_skills_music"> add one skills_music</a>{% endblock %}

@@ -1,13 +1,20 @@
 {% extends 'base.html' %}
 
+{% block montitre %}
+debut de mes mots: bienvenue dans projet musical ou automation
+{% endblock %}
 {% block content %}
 <h1># network-musician</h1>
 {% for x in users | reverse %}
  <li>{{ x["first_name"]  }}</li>
 
 {% endfor %} 
+fin de mes mots : quelles sont les skills it de la fille et du garçon ? les skill musicales ? peuvent ils faire des projet hybrides pour devenir musiciens invincibles ?
+- Fille: souvent -> concerto + automation diffusion
+- Garçon: souvent -> orchestra + orchestration cluster
+- Mais interchangeable - cest le principe hybride
+- website: scène musicale + scène numérique
 {% endblock %}
 {% block liens %}
 <a href="/">welcome</a>
 {% endblock %}
-<a href="/add_one_user"> add one user</a><a href="/add_one_itskills"> add one itskills</a><a href="/add_one_musicalskills"> add one musicalskills</a><a href="/add_one_userhasmusicalskill"> add one userhasmusicalskill</a><a href="/add_one_userhasitskill"> add one userhasitskill</a>

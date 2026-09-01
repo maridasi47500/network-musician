@@ -13,9 +13,20 @@ def get_db():
 def query_db(query, args=(), one=False):
     mydb = get_db()
     cur = mydb.execute(query, args)
-    if "insert into" in query:
+    insert=""
+    if "insert into" in query or ("update " in query and "set" in query):
+
         mydb.commit()
+        insert="yes"
 
     rv = cur.fetchall()
+    try:
+        myid=cur.lastrowid
+    except:
+        myid=""
     cur.close()
-    return (rv[0] if rv else None) if one else rv
+    
+    if insert == "yes":
+        return {"myid": myid}
+    else:
+        return (rv[0] if rv else None) if one else rv

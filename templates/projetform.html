@@ -1,0 +1,5 @@
+{% extends 'base.html' %}{% block content %}<form  enctype="multipart/form-data" method="POST">
+<div class="field"><label for="somefieldprojetskills_music_id">skills_music_id</label><input type="text" id="somefieldprojetskills_music_id" name="skills_music_id"/></div>
+<div class="field"><label for="somefieldprojetskills_it">skills_it</label><input type="text" id="somefieldprojetskills_it" name="skills_it"/></div>
+<div class="field"><label for="somefieldprojetprofile_id">profile_id</label><input type="text" id="somefieldprojetprofile_id" name="profile_id"/></div>
+<div class="field"><label for="somefieldprojetwebsite_description">website_description</label><input type="text" id="somefieldprojetwebsite_description" name="website_description"/></div><div class="actions"><input type="submit"/></div></form>{% for x in projets %}{{x["skills_music_id"] }}{% endfor %}{% endblock %}{% block liens %}<a href="/">bienvenue</a><a href="/add_one_projet"> add one projet</a>{% endblock %}

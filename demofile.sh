@@ -1,0 +1,9 @@
+
+mkdir templates 
+python3 scaffold.py profile girl_boy_id role socialmedia_id optionnel_visage_voix status_developer username password email phone country_id:references
+python3 scaffold.py country name
+python3 scaffold.py skills_music orchestra:radio chamber_music:radio concerto_solo:radio creation_artistique:radio performance_live_online:radio user_id
+python3 scaffold.py skills_it orchestration_conteneurs_musicale network_engineerung dev_tools  monitoring_stats_vues_popularite socialmedia_skill_it
+python3 scaffold.py content_flow content type_it_musical socialmedia_id:references
+python3 scaffold.py socialmedia name
+python3 scaffold.py projet skills_music_id skills_it profile_id website_description

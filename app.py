@@ -1,8 +1,13 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session, redirect
+from myplace import Myplace
+from bs4 import BeautifulSoup
+import subprocess
+import os
 from yourappdb import query_db, get_db
 from flask import g
 
 app = Flask(__name__)
+app.secret_key="any string"
 def init_db():
     with app.app_context():
         db = get_db()
@@ -24,68 +29,158 @@ def hello_world():
     one_user = query_db('select * from contacts where first_name = ?',
                 [the_username], one=True)
     return render_template("hey.html", users=user, one_user=one_user, the_title="my title")
-@app.route("/add_one_user", methods=["GET","POST"])
-def add_one_user():
+@app.route("/add_one_profile", methods=["GET","POST"])
+def add_one_profile():
 
     if request.method == 'POST':
 
         the_username = "anonyme"
-        one_user = query_db("insert into user (username,country_id,phone,email) values (:username,:country_id,:phone,:email)",request.form)
-        user = query_db('select * from user')
-        return render_template("userform.html", users=user, one_user=one_user, the_title="add new user")
-    user = query_db('select * from user')
-    one_user = query_db("select * from user limit 1", one=True)
-    return render_template("userform.html", users=user, one_user=one_user, the_title="add new user")
+        hey=dict(request.form)
 
-@app.route("/add_one_itskills", methods=["GET","POST"])
-def add_one_itskills():
 
-    if request.method == 'POST':
+        touslescountry= query_db("select * from country")
 
-        the_username = "anonyme"
-        one_user = query_db("insert into itskills (name) values (:name)",request.form)
-        user = query_db('select * from itskills')
-        return render_template("itskillsform.html", itskillss=user, one_user=one_user, the_title="add new itskills")
-    user = query_db('select * from itskills')
-    one_user = query_db("select * from itskills limit 1", one=True)
-    return render_template("itskillsform.html", itskillss=user, one_user=one_user, the_title="add new itskills")
+        one_user = query_db("insert into profile (girl_boy_id,role,socialmedia_id,optionnel_visage_voix,status_developer,username,password,email,phone,country_id) values (:girl_boy_id,:role,:socialmedia_id,:optionnel_visage_voix,:status_developer,:username,:password,:email,:phone,:country_id)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from profile')
 
-@app.route("/add_one_musicalskills", methods=["GET","POST"])
-def add_one_musicalskills():
 
-    if request.method == 'POST':
+        return render_template("profileform.html", profiles=user, one_user=one_user, the_title="add new profile", touslescountry=touslescountry)
 
-        the_username = "anonyme"
-        one_user = query_db("insert into musicalskills (name) values (:name)",request.form)
-        user = query_db('select * from musicalskills')
-        return render_template("musicalskillsform.html", musicalskillss=user, one_user=one_user, the_title="add new musicalskills")
-    user = query_db('select * from musicalskills')
-    one_user = query_db("select * from musicalskills limit 1", one=True)
-    return render_template("musicalskillsform.html", musicalskillss=user, one_user=one_user, the_title="add new musicalskills")
 
-@app.route("/add_one_userhasmusicalskill", methods=["GET","POST"])
-def add_one_userhasmusicalskill():
+    touslescountry= query_db("select * from country")
+
+    user = query_db('select * from profile')
+    one_user = query_db("select * from profile limit 1", one=True)
+    return render_template("profileform.html", profiles=user, one_user=one_user, the_title="add new profile", touslescountry=touslescountry)
+
+@app.route("/add_one_country", methods=["GET","POST"])
+def add_one_country():
 
     if request.method == 'POST':
 
         the_username = "anonyme"
-        one_user = query_db("insert into userhasmusicalskill (skill_id,user_id) values (:skill_id,:user_id)",request.form)
-        user = query_db('select * from userhasmusicalskill')
-        return render_template("userhasmusicalskillform.html", userhasmusicalskills=user, one_user=one_user, the_title="add new userhasmusicalskill")
-    user = query_db('select * from userhasmusicalskill')
-    one_user = query_db("select * from userhasmusicalskill limit 1", one=True)
-    return render_template("userhasmusicalskillform.html", userhasmusicalskills=user, one_user=one_user, the_title="add new userhasmusicalskill")
+        hey=dict(request.form)
 
-@app.route("/add_one_userhasitskill", methods=["GET","POST"])
-def add_one_userhasitskill():
+
+        one_user = query_db("insert into country (name) values (:name)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from country')
+
+
+        return render_template("countryform.html", countrys=user, one_user=one_user, the_title="add new country")
+
+
+    user = query_db('select * from country')
+    one_user = query_db("select * from country limit 1", one=True)
+    return render_template("countryform.html", countrys=user, one_user=one_user, the_title="add new country")
+
+@app.route("/add_one_skills_music", methods=["GET","POST"])
+def add_one_skills_music():
 
     if request.method == 'POST':
 
         the_username = "anonyme"
-        one_user = query_db("insert into userhasitskill (skill_id,user_id) values (:skill_id,:user_id)",request.form)
-        user = query_db('select * from userhasitskill')
-        return render_template("userhasitskillform.html", userhasitskills=user, one_user=one_user, the_title="add new userhasitskill")
-    user = query_db('select * from userhasitskill')
-    one_user = query_db("select * from userhasitskill limit 1", one=True)
-    return render_template("userhasitskillform.html", userhasitskills=user, one_user=one_user, the_title="add new userhasitskill")
+        hey=dict(request.form)
+
+
+        one_user = query_db("insert into skills_music (orchestra,chamber_music,concerto_solo,creation_artistique,performance_live_online,user_id) values (:orchestra,:chamber_music,:concerto_solo,:creation_artistique,:performance_live_online,:user_id)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from skills_music')
+
+
+        return render_template("skills_musicform.html", skills_musics=user, one_user=one_user, the_title="add new skills_music")
+
+
+    user = query_db('select * from skills_music')
+    one_user = query_db("select * from skills_music limit 1", one=True)
+    return render_template("skills_musicform.html", skills_musics=user, one_user=one_user, the_title="add new skills_music")
+
+@app.route("/add_one_skills_it", methods=["GET","POST"])
+def add_one_skills_it():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=dict(request.form)
+
+
+        one_user = query_db("insert into skills_it (orchestration_conteneurs_musicale,network_engineerung,dev_tools,monitoring_stats_vues_popularite,socialmedia_skill_it) values (:orchestration_conteneurs_musicale,:network_engineerung,:dev_tools,:monitoring_stats_vues_popularite,:socialmedia_skill_it)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from skills_it')
+
+
+        return render_template("skills_itform.html", skills_its=user, one_user=one_user, the_title="add new skills_it")
+
+
+    user = query_db('select * from skills_it')
+    one_user = query_db("select * from skills_it limit 1", one=True)
+    return render_template("skills_itform.html", skills_its=user, one_user=one_user, the_title="add new skills_it")
+
+@app.route("/add_one_content_flow", methods=["GET","POST"])
+def add_one_content_flow():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=dict(request.form)
+
+
+        touslessocialmedia= query_db("select * from socialmedia")
+
+        one_user = query_db("insert into content_flow (content,type_it_musical,socialmedia_id) values (:content,:type_it_musical,:socialmedia_id)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from content_flow')
+
+
+        return render_template("content_flowform.html", content_flows=user, one_user=one_user, the_title="add new content_flow", touslessocialmedia=touslessocialmedia)
+
+
+    touslessocialmedia= query_db("select * from socialmedia")
+
+    user = query_db('select * from content_flow')
+    one_user = query_db("select * from content_flow limit 1", one=True)
+    return render_template("content_flowform.html", content_flows=user, one_user=one_user, the_title="add new content_flow", touslessocialmedia=touslessocialmedia)
+
+@app.route("/add_one_socialmedia", methods=["GET","POST"])
+def add_one_socialmedia():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=dict(request.form)
+
+
+        one_user = query_db("insert into socialmedia (name) values (:name)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from socialmedia')
+
+
+        return render_template("socialmediaform.html", socialmedias=user, one_user=one_user, the_title="add new socialmedia")
+
+
+    user = query_db('select * from socialmedia')
+    one_user = query_db("select * from socialmedia limit 1", one=True)
+    return render_template("socialmediaform.html", socialmedias=user, one_user=one_user, the_title="add new socialmedia")
+
+@app.route("/add_one_projet", methods=["GET","POST"])
+def add_one_projet():
+
+    if request.method == 'POST':
+
+        the_username = "anonyme"
+        hey=dict(request.form)
+
+
+        one_user = query_db("insert into projet (skills_music_id,skills_it,profile_id,website_description) values (:skills_music_id,:skills_it,:profile_id,:website_description)",hey, one=True)
+        mylastrowid=str(one_user["myid"])
+        user = query_db('select * from projet')
+
+
+        return render_template("projetform.html", projets=user, one_user=one_user, the_title="add new projet")
+
+
+    user = query_db('select * from projet')
+    one_user = query_db("select * from projet limit 1", one=True)
+    return render_template("projetform.html", projets=user, one_user=one_user, the_title="add new projet")
 
